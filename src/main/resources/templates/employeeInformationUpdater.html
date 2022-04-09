@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>社員管理システム</title>
+	<style>
+		.hight-change {
+			height: -5px;
+		}
+	</style>
+</head>
+<H1>社員管理システム</H1>
+
+<body>
+	<form th:action="@{/employeeInformationUpdater/update}" th:object="${form}" method="post">
+		<!-- 更新フォーム -->
+		<table border="1" align="center">
+			<tr>
+				<td align="center" width="150" bgcolor="#C0FFC0">社員番号</td>
+				<td align="center" width="150" bgcolor="#C0FFC0">社員名（漢字）</td>
+				<td align="center" width="150" bgcolor="#C0FFC0">社員名（カナ）</td>
+				<td align="center" width="150" bgcolor="#C0FFC0">所属部署</td>
+			</tr>
+			<tr>
+				<td><input type="text" name="shainNo" minlength="4" maxlength="4" th:value="*{shainNo}" /></td>
+				<td><input type="text" name="shainNameKj" maxlength="20" th:value="*{shainNameKj}" /></td>
+				<td><input type="text" name="shainNameKn" maxlength="40" th:value="*{shainNameKn}" /></td>
+				<form th:object="${bushoName}" method="post">
+					<td>
+						<select name="bushoName">
+							<option value="">選択してください</option>
+							<option value="001">営業部</option>
+							<option value="002">開発部</option>
+							<option value="003">総務部</option>
+							<option value="004">人事部</option>
+						</select>
+					</td>
+				</form>
+			</tr>
+		</table>
+
+		<table bordercolor="#FFFFFF" align="center">
+			<tr>
+				<td align="left" width="174.4">
+					<font size=-1>※半角数字4桁</font>
+				</td>
+				<td align="left" width="174.4">
+					<font size=-1>※20文字以内</font>
+				</td>
+				<td align="left" width="174.4">
+					<font size=-1>※40文字以内</font>
+				</td>
+				<td align="left" width="154">
+					<font size=-1></font>
+				</td>
+			</tr>
+		</table>
+		<p align="right"><button type="submit" name="update">更新</button></p>
+		<br>
+		<!-- <a href="/spring"></a> -->
+		<p align="right"><button type="button" onclick="location.href='/spring/'">戻る</button></p>
+
+		<!-- 更新メッセージ　-->
+		<th:if="*{message !=null}">
+			<div>
+				<p align="center" th:text="*{message}">
+			</div>
+
+			<!-- validationメッセージ -->
+			<font size=-1 color="#FF0000">
+				<center>
+					<div th:errors="*{shainNo}"></div>
+					<div th:errors="*{shainNameKj}"></div>
+					<div th:errors="*{shainNameKn}"></div>
+					<div th:errors="*{bushoName}"></div>
+				</center>
+			</font>
+	</form>
+</body>
+
+</html>

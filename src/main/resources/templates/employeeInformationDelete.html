@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>社員管理システム</title>
+</head>
+<H1>社員管理システム</H1>
+
+<body>
+	<form th:action="@{/employeeInformationDelete/delete}" th:object="${form}" method="post">
+		<!-- 削除フォーム -->
+		<table border="0" align="center">
+			<tr>
+				<td align="right">社員番号：</td>
+				<td><input type="text" maxlength="4" name="shainNo" th:value="*{shainNo}" /></td>
+				<td align="right"><button type="submit" name="delete">削除</button></td>
+				<span style="float: right;"><button type="button" onclick="location.href='/spring/'">戻る</button></span>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+
+		<!-- メッセージ　-->
+		<font size=-1 color="#FF0000">
+			<th:if="*{message !=null}">
+				<div>
+					<p align="center" th:text="*{message}">
+				</div>
+
+				<!-- validationメッセージ　-->
+				<center>
+					<div th:errors="*{shainNo}"></div>
+				</center>
+		</font>
+		<hr>
+	</form>
+</body>
+
+</html>

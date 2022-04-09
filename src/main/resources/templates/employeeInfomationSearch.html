@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>社員管理システム</title>
+</head>
+<tr>
+	<span style="float: right;"><button type="button"
+			onclick="location.href='/spring/employeeInformationRegister/'">新規登録</button></span>
+	<td>&nbsp;</td>
+</tr>
+<H1>社員管理システム</H1>
+
+<body>
+	<!-- 検索フォーム -->
+	<!-- formタグの範囲を社員検索結果を含む形にすると削除ボタンを作る際問題がある。検索条件のみをformの範囲とする -->
+	<!-- 削除ボタンを押した際にリダイレクトされるのでmethodをgetに変更している -->
+	<form th:action="@{/employeeInfomationSearch/search}" th:object="${form}" method="get">
+		<table border="0" align="center">
+			<tr>
+				<td align="right">社員番号：</td>
+				<td><input type="text" name="shainNo" th:value="*{shainNo}" /></td>
+				<td align="right"><button type="submit" name="search">検索</button></td>
+			</tr>
+		</table>
+	</form>
+	<span style="float: right;"><button type="button" onclick="location.href='/spring/'">戻る</button></span>
+	<td>&nbsp;</td>
+
+	<hr>
+
+	<!-- 検索結果表示部 -->
+	<div th:if="*{shainInfo != null}">
+		<table border="0" align="center">
+			<td>
+				<table border="0" align="left">
+					<td align="right">
+						<検索結果>
+					</td>
+				</table>
+			</td>
+			<tr>
+				<td>
+					<table border="1" align="left">
+						<tr>
+							<td align="center" width="10" bgcolor="#c0ffc0">No</td>
+							<td align="center" width="80" bgcolor="#c0ffc0">社員番号</td>
+							<td align="center" width="150" bgcolor="#c0ffc0">社員名</td>
+							<td align="center" width="150" bgcolor="#c0ffc0">所属部署</td>
+							<td align="center" width="80" bgcolor="#c0ffc0">編集</td>
+							<td align="center" width="80" bgcolor="#c0ffc0">削除</td>
+						</tr>
+						<tr>
+							<td align="right" width="10" th:text="1"></td>
+							<td align="center" width="80" th:text="*{shainInfo.shainNo}"></td>
+							<td align="left" width="150" th:text="*{shainInfo.shainNameKj}"></td>
+							<td align="left" width="150" th:text="*{shainInfo.bushoName}"></td>
+
+							<td align="center" width="80"><button type="button"
+									onclick="location.href='/spring/employeeInformationUpdater/'">編集</button></td>
+							<td align="center" width="80"><button type="button"
+									onclick="location.href='/spring/employeeInformationDelete/'">削除</button></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- 全社員検索結果表示 -->
+	<div th:if="*{shainInfoList != null}">
+		<table border="0" align="center">
+			<td>
+				<table border="0" align="left">
+					<td align="right">
+						<検索結果>
+					</td>
+				</table>
+			</td>
+			<tr>
+				<td>
+					<table border="1" align="left">
+						<thead>
+							<tr>
+								<th align="center" width="10" bgcolor="#c0ffc0">No</th>
+								<th align="center" width="80" bgcolor="#c0ffc0">社員番号</th>
+								<th align="center" width="150" bgcolor="#c0ffc0">社員名</th>
+								<th align="center" width="150" bgcolor="#c0ffc0">所属部署</th>
+								<td align="center" width="80" bgcolor="#c0ffc0">編集</td>
+								<td align="center" width="80" bgcolor="#c0ffc0">削除</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="shainInfo, stat : *{shainInfoList}" th:object="${shainInfo}">
+								<td align="right" width="10" th:text="${stat.count}"></td>
+								<td align="center" width="80" th:text="*{shainNo}"></td>
+								<td align="left" width="150" th:text="*{shainNameKj}"></td>
+								<td align="left" width="150" th:text="*{bushoName}"></td>
+
+								<!-- 編集ボタン th:actionでControllerの遷移先を指定 -->
+								<td align="center" width="80">
+									<form th:action="@{/employeeInfomationSearch/update}" method="post">
+										<input type="submit" value="編集">
+										<input type="hidden" name="shainNo" th:value=*{shainNo}>
+									</form>
+
+									<!-- 削除ボタン th:actionでControllerの遷移先を指定 -->
+								<td align="center" width="80">
+									<form th:action="@{/employeeInfomationSearch/delete}" method="post">
+										<input type="submit" value="削除">
+										<input type="hidden" name="shainNo" th:value=*{shainNo}>
+									</form>
+
+
+									<!--			<td align="center" width="80"><button type="button"
+											onclick="location.href='/spring/employeeInformationUpdater/'">編集</button>
+									</td>
+									<td align="center" width="80"><button type="button"
+											onclick="location.href='/spring/employeeInformationDelete/'">削除</button>
+									</td>
+						-->
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+
+</html>

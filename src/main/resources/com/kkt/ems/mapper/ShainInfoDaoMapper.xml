@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kkt.ems.mapper.ShainInfoDaoMapper">
+	<select id="select" parameterType="String"
+		resultType="com.kkt.ems.dto.ShainInfoDto">
+		SELECT
+		SHAIN_INFO.SHAIN_NO,
+		SHAIN_INFO.SHAIN_NAME_KJ,
+		SHAIN_INFO.SHAIN_NAME_KN,
+		BUSHO_INFO.BUSHO_NAME
+		FROM
+		SHAIN_INFO
+		JOIN
+		BUSHO_INFO
+		ON
+		SHAIN_INFO.BUSHO_CD = BUSHO_INFO.BUSHO_CD
+		WHERE
+		SHAIN_INFO.SHAIN_NO = #{shainNo}
+
+	</select>
+</mapper>

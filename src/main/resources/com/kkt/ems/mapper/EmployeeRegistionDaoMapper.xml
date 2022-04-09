@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kkt.ems.mapper.EmployeeRegistionDaoMapper">
+	<select id="register" parameterType="ShainInfoDto"
+		resultType="com.kkt.ems.dto.ShainInfoDto">
+		
+		INSERT INTO
+		SHAIN_INFO(SHAIN_INFO.SHAIN_NO, SHAIN_INFO.SHAIN_NAME_KJ, SHAIN_INFO.SHAIN_NAME_KN, SHAIN_INFO.BUSHO_CD)
+		VALUES(#{shainNo}, #{shainNameKj}, #{shainNameKn}, #{bushoName})
+
+	</select>
+</mapper>
