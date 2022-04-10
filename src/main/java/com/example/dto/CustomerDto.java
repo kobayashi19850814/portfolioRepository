@@ -16,7 +16,7 @@ public class CustomerDto {
 	/** 郵便番号 */
 	private String customerPostCode;
 	/** 住所 */
-	private String customerAdress;
+	private String customerAddress;
 
 	
 	/** 顧客IDを設定 */
@@ -70,13 +70,13 @@ public class CustomerDto {
 	}
 
 	/** 住所を設定 */
-	public void setCustomerAdress(String customerAdress) {
-		this.customerAdress = customerAdress;
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
 	}
 
 	/** 住所を取得 */
-	public String getCustomerAdress() {
-		return customerAdress;
+	public String getCustomerAddress() {
+		return customerAddress;
 	}
 
 }

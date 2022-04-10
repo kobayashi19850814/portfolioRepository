@@ -3,30 +3,109 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>社員管理システム</title>
+	<title>顧客管理システム</title>
 </head>
 <tr>
 
-	<H1>社員管理システム</H1>
+	<H1>顧客管理システム</H1>
 
 	<body>
-		<form action="/search" method="post">
-
+		<form th:action="@{search/customerSearch}" th:object="${form}" method="post">
 			<table border="0" align="center">
 				<tr>
 					<td align="right">顧客ID：</td>
-					<td><input type="text" name="customerId" th:value="*{customerId}" /></td>
+					<td><input type="text" name="customerId" /></td>
 					<td align="right"><button type="submit" name="search">検索</button></td>
 				</tr>
 			</table>
 		</form>
-		<span style="float: right;"><button type="button" onclick="location.href='/spring/'">戻る</button></span>
+		<span style="float: right;"><button type="button" onclick="location.href='/topPage/'">戻る</button></span>
 		<td>&nbsp;</td>
 
 		<hr>
 
+	<!-- 検索結果表示部 -->
+		<div th:if="*{customerInfo != null}">
+			<table border="0" align="center">
+				<td>
+					<table border="0" align="left">
+						<td align="right">
+							<検索結果>
+						</td>
+					</table>
+				</td>
+				<tr>
+					<td>
+						<table border="1" align="left">
+							<tr>
+								<td align="center" width="10" bgcolor="#c0ffc0">No</td>
+								<td align="center" width="30" bgcolor="#c0ffc0">顧客ID</td>
+								<td align="center" width="150" bgcolor="#c0ffc0">名前</td>
+								<td align="center" width="150" bgcolor="#c0ffc0">名前（カナ）</td>
+								<td align="center" width="150" bgcolor="#c0ffc0">電話番号</td>
+								<td align="center" width="80" bgcolor="#c0ffc0">郵便番号</td>
+								<td align="center" width="300" bgcolor="#c0ffc0">住所</td>
+							</tr>
+							<tr>
+								<td align="center" width="10" th:text="1"></td>
+								<td align="center" width="30" th:text="*{customerId}"></td>
+				<!--				<td align="center" width="150" th:text="*{customerInfo.customerName}"></td>
+								<td align="center" width="150" th:text="*{customerInfo.customerNameKn}"></td>
+								<td align="center" width="150" th:text="*{customerInfo.customerTelephoneNumber}"></td>
+								<td align="center" width="80" th:text="*{customerInfo.customerPostCode}"></td>
+								<td align="center" width="300" th:text="*{customerInfo.customerAddress}"></td>
+-->
+								<td align="center" width="80"><button type="button"
+										onclick="location.href='/spring/employeeInformationUpdater/'">編集</button></td>
+								<td align="center" width="80"><button type="button"
+										onclick="location.href='/spring/employeeInformationDelete/'">削除</button></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
 
-
+ 	<!-- 全顧客一覧表示
+		<div th:if="*{customerList != null}">
+			<table border="0" align="center">
+				<td>
+					<table border="0" align="left">
+						<td align="right">
+							<検索結果>
+						</td>
+					</table>
+				</td>
+				<tr>
+					<td>
+						<table border="1" align="left">
+							<thead>
+								<tr>
+									<td align="center" width="10" bgcolor="#c0ffc0">No</td>
+									<td align="center" width="30" bgcolor="#c0ffc0">顧客ID</td>
+									<td align="center" width="150" bgcolor="#c0ffc0">名前</td>
+									<td align="center" width="150" bgcolor="#c0ffc0">名前（カナ）</td>
+									<td align="center" width="150" bgcolor="#c0ffc0">電話番号</td>
+									<td align="center" width="80" bgcolor="#c0ffc0">郵便番号</td>
+									<td align="center" width="300" bgcolor="#c0ffc0">住所</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="customerInfo, stat : *{customerList}" th:object="${customerInfo}">
+									<td align="right" width="10" th:text="${stat.count}"></td>
+									<td align="center" width="30" th:text="*{customerId}"></td>
+									<td align="left" width="150" th:text="*{customerName}"></td>
+									<td align="left" width="150" th:text="*{customerNameKn}"></td>
+									<td align="left" width="150" th:text="*{customerTelephoneNumber}"></td>
+									<td align="left" width="80" th:text="*{customerPostCode}"></td>
+									<td align="left" width="300" th:text="*{customerAddress}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+-->		
 	</body>
-
 </html>

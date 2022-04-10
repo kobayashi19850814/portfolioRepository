@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>顧客管理システム</title>
+</head>
+<H1>顧客管理システム</H1>
+
+<body>
+	<form th:action="@{/Register/customerRegister}" th:object="${form}" th:method="post">
+		<!-- 登録フォーム -->
+		<table border="1" align="center">
+			<tr>
+				<td align="center" width="30" bgcolor="#c0ffc0">顧客ID</td>
+				<td align="center" width="150" bgcolor="#c0ffc0">名前</td>
+				<td align="center" width="150" bgcolor="#c0ffc0">名前（カナ）</td>
+				<td align="center" width="150" bgcolor="#c0ffc0">電話番号</td>
+				<td align="center" width="80" bgcolor="#c0ffc0">郵便番号</td>
+				<td align="center" width="300" bgcolor="#c0ffc0">住所</td>
+			</tr>
+			<tr>
+				<td><input type="text" name="customerId" minlength="1" maxlength="4" th:value="*{customerId}" /></td>
+				<td><input type="text" name="customerName" maxlength="20" th:value="*{customerName}" /></td>
+				<td><input type="text" name="customerNameKn" maxlength="50" th:value="*{customerNameKn}" /></td>
+				<td><input type="text" name="customerTelephoneNumber" maxlength="11"
+						th:value="*{customerTelephoneNumber}" /></td>
+				<td><input type="text" name="customerPostCode" maxlength="7" th:value="*{customerPostCode}" /></td>
+				<td><input type="text" name="customerAddress" maxlength="100" th:value="*{customerAddress}" /></td>
+			</tr>
+		</table>
+		<table border="1" bordercolor="#ffffff" align="center">
+			<tr>
+				<td align="left" width="174.4">
+					<font size=-1>※半角数字4桁</font>
+				</td>
+				<td align="left" width="174.4">
+					<font size=-1>※20文字以内</font>
+				</td>
+				<td align="left" width="174.4">
+					<font size=-1>※40文字以内</font>
+				</td>
+				<td align="left" width="154">
+					<font size=-1></font>
+				</td>
+			</tr>
+		</table>
+		<p align="right"><button type="submit" name="register">登録</button></p>
+		<br>
+		<p align="right"><button type="button" onclick="location.href='/topPage/'">戻る</button></p>
+
+		<!-- 登録メッセージ -->
+		<th:if="*{message !=null}">
+			<div>
+				<p align="center" th:text="*{message}">
+			</div>
+
+			<!--validationメッセージ
+			<font size=-1 color="#FF0000">
+				<center>
+					<div th:errors="*{shainNo}"></div>
+					<div th:errors="*{shainNameKj}"></div>
+					<div th:errors="*{shainNameKn}"></div>
+					<div th:errors="*{bushoName}"></div>
+				</center>
+			</font>
+			-->
+	</form>
+</body>
+
+</html>
